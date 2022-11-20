@@ -19,16 +19,31 @@ public class ProductManager {
 
     public Product[] searchBy(String text) {
         Product[] result = new Product[0];
+        int counter = 0;
         for (Product product : repo.showAllProducts()) {
             if (matches(product, text)) {
-                Product[] tmpresult = new Product[1];
-                tmpresult[0] = product;
-                result = tmpresult;
+                if (counter == 0) {
+                    Product[] tmpresult = new Product[counter + 1];
+                    tmpresult[counter] = product;
+                    result = tmpresult;
 
+                }
+                if (counter > 0) {
+                    Product[] tmpresult1 = new Product[result.length + 1];
+                    for (int i = 0; i < result.length; i++) {
+                        tmpresult1[i] = result[i];
+                    }
+                    tmpresult1[tmpresult1.length - 1] = product;
+                    result = tmpresult1;
+
+                }
+                counter++;
 
             }
         }
-
         return result;
     }
 }
+
+
+
