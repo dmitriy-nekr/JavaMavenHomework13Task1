@@ -35,4 +35,11 @@ public class ProductRepositiryTest {
         Product[] actual = repo.showAllProducts();
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldGetException() {
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            repo.removeById(1);
+        });
+    }
 }
